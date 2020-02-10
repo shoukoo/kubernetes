@@ -234,7 +234,7 @@ resource aws_lb_target_group_attachment main {
 resource aws_lb_listener main {
   protocol          = "TCP"
   load_balancer_arn = aws_lb.main.arn
-  port              = 80
+  port              = 443
 
   default_action {
     type             = "forward"

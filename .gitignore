@@ -2,3 +2,5 @@ key*
 terraform.tfstate*
 .terraform
 elb.txt
+cert/
+.envrc
