@@ -118,7 +118,7 @@ for instance in worker-0 worker-1 worker-2; do
     --filters "Name=tag:Name,Values=${instance}" \
     --output text --query 'Reservations[].Instances[].PublicIpAddress')
 
-  scp -i ../key StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+  scp -i ../key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
     ${instance}.kubeconfig kube-proxy.kubeconfig ubuntu@${external_ip}:~/
 done
 
@@ -128,6 +128,6 @@ for instance in controller-0 controller-1 controller-2; do
     --filters "Name=tag:Name,Values=${instance}" \
     --output text --query 'Reservations[].Instances[].PublicIpAddress')
   
-  scp -i ../key StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+  scp -i ../key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
     admin.kubeconfig kube-controller-manager.kubeconfig kube-scheduler.kubeconfig ubuntu@${external_ip}:~/
 done
