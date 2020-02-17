@@ -4,3 +4,4 @@ terraform.tfstate*
 elb.txt
 cert/
 .envrc
+sg.txt

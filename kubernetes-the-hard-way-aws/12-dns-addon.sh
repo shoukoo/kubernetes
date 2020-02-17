@@ -7,9 +7,13 @@ set -exuo pipefail
 
 kubectl create -f core-dns.yaml
 
-for i in $( kubectl get nodes -o name | cut -d / -f 2); do
-  kubectl label nodes $i kubernetes.io/os=linux
-done
+sleep 60
+kubectl get pods -l k8s-app=kube-dns -n kube-system | grep Running
+kubectl get pods -l k8s-app=kube-dns -n kube-system | grep "3/3"
 
-kubectl get pods -l k8s-app=kube-dns -n kube-system
+# Running busybox
+kubectl run busybox --image=busybox:1.28 --restart=Never -- sleep 3600
 
+sleep 15
+kubectl get pod busybox | grep Running
+kubectl exec -it busybox -- nslookup kubernetes | grep 10.32.0.10

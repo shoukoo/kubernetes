@@ -152,6 +152,10 @@ resource aws_instance worker {
   tags = {
     Name = "worker-${count.index}"
   }
+
+  provisioner "local-exec" {
+    command = "touch sg.txt && echo ${aws_security_group.main.id} > sg.txt"
+  }
 }
 
 resource "aws_iam_instance_profile" "main" {
